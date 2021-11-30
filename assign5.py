@@ -99,26 +99,6 @@ def TSPwGenAlgo(g, max_num_generations=500, population_size=250,
     solution_cycle_distance = final_scored_Pops[0][0]
     solution_cycle_path = final_scored_Pops[0][1]
 
-    topFive = [None]*5
-    for i in range(5):
-        topFive[i] = heapq.heappop(final_scored_Pops)
-    print(f"Generations completed: {gen + 1}")
-    print("  Best:")
-    print(f"    Distance: {topFive[0][0]}")
-    print(f"    Path: {topFive[0][1]}")
-
-    print("  2nd:")
-    print(f"    Distance: {topFive[1][0]}")
-    print(f"    Path: {topFive[1][1]}")
-
-    print("  3rd:")
-    print(f"    Distance: {topFive[2][0]}")
-    print(f"    Path: {topFive[2][1]}")
-    for i in range(3, 5):
-        print(f"  {i+1}th:")
-        print(f"    Distance: {topFive[i][0]}")
-        print(f"    Path: {topFive[i][1]}")
-
     return {
             'solution': solution_cycle_path,
             'solution_distance': solution_cycle_distance,
@@ -128,7 +108,6 @@ def TSPwGenAlgo(g, max_num_generations=500, population_size=250,
 
 def generatePop(g_size, pop_size):
     """ A helper function for the genetic algorithm to create an initial pop """
-    print(f"Generating population of size {pop_size}")
     population = [None]*pop_size # Create array to hold the entire population
     # create individual members of the population
     for i in range(pop_size):
@@ -276,6 +255,22 @@ def TSPwBandB(g):
            }
 
 
+def big_gen_test(num_tests):
+    """ Do multiple runs at once """
+    g = adjMatFromFile("complete_graph_n100.txt")
+    max_gens = 500
+    pop_size = 250
+    mt_rate = 0.04
+    ex_rate = 0.7
+    results = [None]*num_tests
+    for i in range(num_tests):
+        results[i] = TSPwGenAlgo(g, max_gens, pop_size, mt_rate, ex_rate)['solution_distance']
+    print(f"Ran genetic algorithm {num_tests} times @ max_gens: {max_gens} pop_size: {pop_size} mutation_rate: {mt_rate} explore_rate: {ex_rate}")
+    print(f"    Best score: {min(results)}")
+    print(f"    worst score: {max(results)}")
+    print(f"    Avarage score: {sum(results)/num_tests}")
+
+
 def assign05_main():
     """ Load the graph (change the filename when you're ready to test larger ones) """
     g = adjMatFromFile("complete_graph_n100.txt")
@@ -312,5 +307,5 @@ def assign05_main():
 
 # Check if the program is being run directly (i.e. not being imported)
 if __name__ == '__main__':
-    assign05_main()
+    big_gen_test(20)
 
