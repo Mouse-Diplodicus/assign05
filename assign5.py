@@ -229,32 +229,6 @@ def makeChild(couple):
     return children
 
 
-def TSPwDynProg(g):
-    """ (10pts extra credit) A dynamic programming approach to solve TSP """
-    solution_cycle_distance = None # the distance of the final solution cycle/path
-    solution_cycle_path = [] # the sequence of vertices representing final sol path to be returned
-
-    #...
-
-    return {
-            'solution': solution_cycle_path,
-            'solution_distance': solution_cycle_distance,
-           }
-
-
-def TSPwBandB(g):
-    """ (10pts extra credit) A branch and bound approach to solve TSP """
-    solution_cycle_distance = None # the distance of the final solution cycle/path
-    solution_cycle_path = [] # the sequence of vertices representing final sol path to be returned
-
-    #...
-
-    return {
-            'solution': solution_cycle_path,
-            'solution_distance': solution_cycle_distance,
-           }
-
-
 def big_gen_test(num_tests):
     """ Do multiple runs at once """
     g = adjMatFromFile("complete_graph_n100.txt")
@@ -283,26 +257,6 @@ def assign05_main():
     print(f"  sol dist: {res_ga['solution_distance']}")
     print(f"  sol path: {res_ga['solution']}")
     print(f"  sol evolution: {res_ga['evolution']}")
-
-    # (Try to) run Dynamic Programming algorithm only when n_verts <= 10
-    if len(g) <= 10:
-        start_time = time.time()
-        res_dyn_prog = TSPwDynProg(g)
-        elapsed_time = time.time() - start_time
-        if len(res_dyn_prog['solution']) == len(g) + 1:
-            print(f"Dyn Prog runtime: {elapsed_time:.2f}")
-            print(f"  sol dist: {res_dyn_prog['solution_distance']}")
-            print(f"  sol path: {res_dyn_prog['solution']}")
-
-    # (Try to) run Branch and Bound only when n_verts <= 10
-    if len(g) <= 10:
-        start_time = time.time()
-        res_bnb = TSPwBandB(g)
-        elapsed_time = time.time() - start_time
-        if len(res_bnb['solution']) == len(g) + 1:
-            print(f"Branch & Bound runtime: {elapsed_time:.2f}")
-            print(f"  sol dist: {res_bnb['solution_distance']}")
-            print(f"  sol path: {res_bnb['solution']}")
 
 
 # Check if the program is being run directly (i.e. not being imported)
