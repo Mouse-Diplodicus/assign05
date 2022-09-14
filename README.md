@@ -2,7 +2,7 @@
 
 ### Coding directions
 
-In this assignment I implementing a Genetic Algorithm to solve the Traveling Salesperson
+In this assignment I implemented a Genetic Algorithm to solve the Traveling Salesperson
 problem for a complete, weighted, and directed graph. 
 
 ### Required: Function implemented for Assignment
